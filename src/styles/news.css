@@ -1,0 +1,141 @@
+/* CONTENEDORES PRINCIPALES */
+.news_section {
+  padding: 80px 5%;
+  font-family: 'Inter', sans-serif;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.news_title,
+.news_subTitle {
+  font-size: 2.8rem;
+  font-family: 'Anton', sans-serif;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+/* CARDS */
+.news_cards {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.news_card {
+  flex: 1 1 300px;
+  background: black;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.news_card:hover {
+  transform: translateY(-5px);
+}
+
+.news_card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+.news_button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+/* CAROUSEL */
+.carousel_section {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 30px 10px;
+}
+
+.video_carousel {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.video_carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.video_item_group {
+  display: flex;
+  gap: 20px;
+  flex: 0 0 100%;
+  justify-content: center;
+  scroll-snap-align: start;
+}
+
+.video_item_group iframe {
+  width: 45%;
+  height: 315px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(255, 255, 255, 0.15);
+}
+
+/* FLECHAS */
+.carousel_btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: black;
+  color: #fff;
+  font-size: 2.2rem;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.3s ease;
+}
+
+.carousel_btn:hover {
+  background-color: #ff7c00;
+}
+
+.carousel_btn.left {
+  left: -20px;
+}
+
+.carousel_btn.right {
+  right: -20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .video_item_group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video_item_group iframe {
+    width: 90%;
+    height: 220px;
+  }
+
+  .carousel_btn {
+    display: none;
+  }
+}

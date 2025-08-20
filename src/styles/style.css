@@ -1,0 +1,142 @@
+@font-face {
+  font-family: 'Anton';
+  src: url('../fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bariol-Bold';
+  src: url('../fonts/bariol_bold_italic-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: black;
+  font-family: 'Bariol-bold';
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.loading_screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease-in-out;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.logo_container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.logo_white {
+  z-index: 1;
+}
+
+.logo_white,
+.logo_masked {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.logo_masked {
+   z-index: 2;
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0); 
+  animation: revealClipDiagonal 9.8s ease-out forwards;
+}
+
+@keyframes revealClipDiagonal {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  }
+  100% {
+    clip-path: polygon(0 0, 300% 0, 100% 50%, 0 100%);
+  }
+}
+
+@keyframes diagonalReveal {
+  from {
+    -webkit-mask-image: linear-gradient(135deg, transparent 48%, black 50%, transparent 52%);
+    mask-image: linear-gradient(135deg, transparent 48%, black 50%, transparent 52%);
+    -webkit-mask-position: -100% -100%;
+    mask-position: -100% -100%;
+  }
+  to {
+    -webkit-mask-position: 100% 100%;
+    mask-position: 100% 100%;
+  }
+}
+
+.loading_text {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  font-family: 'Bariol-bold';
+}
+
+.loading_text.visible {
+  opacity: 1;
+}
+
+.background_words {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.word {
+  position: absolute;
+  font-size: 1rem;
+  font-family: 'Bariol-bold';
+  color: rgba(255, 255, 255, 0.2);
+  animation: fadeWord 2.5s ease-in-out forwards;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px white);
+}
+
+@keyframes fadeWord {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
