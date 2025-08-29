@@ -40,7 +40,10 @@ export default function News() {
 
   return (
     <section className="news_section">
-      <h2 className="news_title">BETR NEWS</h2>
+      <div className="title_container">
+      <h2 className="news_title">NEWS</h2>
+      <h2 className="news_title2">BETR</h2>
+      </div>
 
       <div className="news_cards">
         {newsItems.map((item, index) => (
@@ -67,12 +70,12 @@ export default function News() {
         <button className="carousel_btn left" onClick={() => scroll('left')}>❮</button>
         <div className="video_carousel" ref={carouselRef}>
           <div className="video_item_group">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ndm-9MO2pqg?si=07PADDVPCZifGTPH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>           
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/lKRFQVJra0E?si=Am9x3khROknOjWEl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ndm-9MO2pqg?si=07PADDVPCZifGTPH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer" allowfullscreen></iframe>           
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lKRFQVJra0E?si=Am9x3khROknOjWEl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer" allowfullscreen></iframe>
           </div>
           <div className="video_item_group">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/-naWOsbvcZE?si=vv1mpJfSkRyzg1Ug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/2moOVfPCVT8?si=oIHJfIHZSb_S2mXY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>          
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/-naWOsbvcZE?si=vv1mpJfSkRyzg1Ug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/2moOVfPCVT8?si=oIHJfIHZSb_S2mXY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer" allowfullscreen></iframe>          
           </div>
         </div>
         <button className="carousel_btn right" onClick={() => scroll('right')}>❯</button>

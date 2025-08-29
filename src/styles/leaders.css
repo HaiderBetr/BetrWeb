@@ -1,0 +1,151 @@
+.leaders_section {
+  background-color: #ffffff;
+  padding: 60px 5%;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  color: black;
+}
+
+.leaders_content {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  letter-spacing: 0.7px;
+  min-height: 600px;
+}
+
+.leaders_text {
+  flex: 1 1 400px;
+  max-width: 500px;
+  height: 100%;
+  text-align: left;
+  letter-spacing: 0.5px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.leaders_cards {
+  flex: 1 1 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.leaders_title {
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  margin-bottom: 5px;
+  color: black;
+  text-align: justify;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.leaders_title .gold {
+  color: #000000;
+}
+
+.leaders_subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: justify;
+  letter-spacing: 0.4px;
+}
+
+.leaders_desc {
+  font-size: 1rem;
+  color: black;
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+  line-height: 1.6;
+  text-align: justify;
+  letter-spacing: 0.5px;
+}
+
+.leaders_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.leader_card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.296);
+  width: 320px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+  color: black;
+}
+
+.leader_image {
+  padding: 0;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.leader_image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+
+.leader_name {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+.leader_list {
+  text-align: left;
+  padding: 20px;
+  font-size: 0.95rem;
+  list-style: none;
+}
+
+.leader_list li {
+  margin-bottom: 20px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.leader_list li::before {
+  content: '•';
+  color: #000;
+  position: absolute;
+  left: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .leaders_content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leaders_text {
+    text-align: center;
+    align-items: center;
+  }
+
+  .leaders_desc,
+  .leaders_subtitle,
+  .leaders_title {
+    text-align: center;
+  }
+}
+

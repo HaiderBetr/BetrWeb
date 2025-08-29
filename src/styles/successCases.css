@@ -18,7 +18,7 @@
 .cases_grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  height: 300px;
+  height: 330px;
   gap: 15px;
   justify-content: center;
 }
@@ -98,17 +98,74 @@
   height: 14px;
 }
 
-@media (max-width: 768px) {
-  .section_title {
-    font-size: 2rem;
-  }
-
+/* ====== Portátil (1024px – 1439px) ====== */
+@media (min-width: 1024px) and (max-width: 1439px) {
   .cases_grid {
-    gap: 20px;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 18px;
   }
 
-  .case_metrics {
-    flex-direction: column;
-    gap: 6px;
+  .case_card_clean {
+    height: 330px;        /* altura para portátil */
+  }
+
+  .case_card_clean img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ====== Pantalla grande (≥ 1440px) ====== */
+@media (min-width: 1440px) {
+  .cases_grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .case_card_clean {
+    height: 350px;        /* altura para pantalla grande */
+  }
+
+  .case_card_clean img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ====== Tablet (769px – 1023px): 3 por fila, altura auto ====== */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .cases_grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px;
+  }
+
+  .case_card_clean {
+    height: auto; /* se adapta */
+    aspect-ratio: 16/11;
+  }
+
+  .case_card_clean img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ====== Móvil (≤ 768px): 2 por fila, altura auto ====== */
+@media (max-width: 768px) {
+  .cases_grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+
+  .case_card_clean {
+    height: auto;
+    aspect-ratio: 4/5;
+  }
+
+  .case_card_clean img {
+    height: 100%;
+    object-fit: cover;
   }
 }
