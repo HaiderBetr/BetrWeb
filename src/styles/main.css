@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -10,15 +8,12 @@ html, body {
   font-family: 'Share Tech Mono', monospace;
 }
 
-.main_wrapper {
-  padding-top: 70px;
-}
+.main_wrapper { padding-top: 80px; }
 
-/* NAVBAR */
+/* ====== NAVBAR (BASE) ====== */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 70px;
   background: rgba(0, 0, 0, 0.85);
@@ -28,14 +23,13 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
-  z-index: 1000;
+  z-index: 2147483000; /* alto para overlay */
 }
 
-.logo-navbar {
-  width: 85px;
-}
+.logo-navbar { width: 83px; }
 
 .nav-links {
+  /* Desktop: fila; móvil/tablet: se redefine a overlay */
   display: flex;
   list-style: none;
   gap: 30px;
@@ -50,12 +44,9 @@ html, body {
   color: white;
   font-size: 18px;
 }
+.nav-links li a:hover { color: orange; }
 
-.nav-links li a:hover {
-  color: orange;
-}
-
-/* VIDEO */
+/* ====== VIDEO ====== */
 .video_section {
   width: 100vw;
   height: 90vh;
@@ -65,7 +56,6 @@ html, body {
   position: relative;
   z-index: 1;
 }
-
 .video_section video {
   width: 100%;
   height: 100%;
@@ -73,7 +63,7 @@ html, body {
   display: block;
 }
 
-/* CONTADOR */
+/* ====== CONTADOR (base existente) ====== */
 .contador_section {
   background-color: #ffa500;
   padding: 50px 20px;
@@ -81,39 +71,350 @@ html, body {
   border-top: 4px solid #ff8c00;
   border-bottom: 4px solid #ff8c00;
 }
-
-.contador_titulo {
-  font-size: 2.2rem;
-  color: #000;
-  margin-bottom: 10px;
-}
-
-.contador_grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 30px;
-}
-
-.contador_col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contador_label {
-  font-size: 1.3rem;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
+.contador_titulo { font-size: 2.2rem; color: #000; margin-bottom: 10px; }
+.contador_grid { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+.contador_col { display: flex; flex-direction: column; align-items: center; }
+.contador_label { font-size: 1.3rem; color: #333; font-weight: 600; margin-bottom: 8px; }
 .contador_valor {
-  font-size: 2.5rem;
-  font-weight: bold;
-  background-color: #fff;
-  color: #000;
-  padding: 10px 20px;
+  font-size: 2.5rem; font-weight: bold;
+  background-color: #fff; color: #000;
+  padding: 10px 20px; border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,.25);
+}
+
+/* ====== NAV: HAMBURGUESA + ACCESIBILIDAD ====== */
+.nav-toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: white;
+  display: none;             /* visible en ≤1023px */
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
   border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.nav-toggle:focus-visible { outline: 2px solid #ffffff88; outline-offset: 2px; }
+
+.hamburger { position: relative; width: 22px; height: 16px; display: inline-block; }
+.hamburger span {
+  position: absolute; left: 0; right: 0; height: 2px; background: currentColor;
+  transform-origin: center; transition: transform .22s ease, opacity .22s ease, top .22s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 7px; }
+.hamburger span:nth-child(3) { top: 14px; }
+.hamburger.is-active span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+.hamburger.is-active span:nth-child(2) { opacity: 0; }
+.hamburger.is-active span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+.no-scroll { overflow: hidden !important; }
+
+/* ====== NAVBAR RESPONSIVE ====== */
+/* --- Móvil + Tablets (overlay a pantalla completa) --- */
+@media (max-width: 1023px) {
+  .navbar { height: 60px; padding: 0 16px; position: fixed; }
+  .logo-navbar { width: 80px; height: auto; margin-right: auto; }
+
+  /* Icono hamburguesa a la derecha y visible */
+  .nav-toggle {
+    display: inline-flex !important;
+    position: absolute;
+    right: 12px;               /* ajusta a gusto: 12–20px */
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    z-index: 2147483650;
+  }
+
+  .nav-links {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100dvh !important;
+    padding: calc(28px + env(safe-area-inset-top)) 24px 24px 24px !important;
+
+    background: rgba(0,0,0,0.96) !important;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+
+    z-index: 2147483647 !important; /* por encima de todo */
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    transition: transform .26s ease, opacity .2s ease, visibility 0s linear .26s;
+  }
+
+  .nav-links.is-open {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: transform .26s ease, opacity .2s ease;
+  }
+
+  /* Posición de la X dentro del overlay */
+  .nav-links .nav-close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + 8px);
+    right: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 2147483651; /* sobre contenido del overlay */
+  }
+  .nav-close-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    width: 42px; height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .nav-close-btn:focus-visible { outline: 2px solid #ffffff88; outline-offset: 2px; }
+
+  .nav-links li a.nav-link {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.08rem;
+    padding: 14px 8px;
+    display: block;
+    width: 100%;
+  }
+}
+
+/* --- Desktop (fila horizontal normal) --- */
+@media (min-width: 1024px) {
+  .nav-toggle { display: none !important; }
+  .navbar { height: 70px; padding: 0 40px; }
+  .logo-navbar { width: 80px; }
+
+  .nav-links {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+
+    background: transparent !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: clamp(12px, 1.5vw, 30px) !important;
+
+    height: auto !important; width: auto !important;
+    padding: 0 !important;
+    z-index: auto !important;
+  }
+  .contador_section {
+    padding-top: 32px !important;    /* antes 50px */
+    padding-bottom: 32px !important; /* antes 50px */
+  }
+
+  .contador_titulo {
+    margin-bottom: 8px !important;   /* antes 10–18px */
+  }
+
+  .contador_grid {
+    margin-top: 12px !important;     /* antes 20–30px */
+    gap: 14px !important;            /* antes 20px */
+  }
+
+  .contador_label {
+    margin-bottom: 4px !important;   /* un poco más cerrado */
+  }
+
+  .contador_valor {
+    padding: 10px 16px !important;   /* menos “aire” que 16–20px */
+    font-size: 2.2rem !important;    /* baja un punto (era 2.4rem) */
+  }
+}
+
+/* ====== VISIBILIDAD DE LA X (cerrar) ====== */
+.nav-close,
+.nav-close-btn { display: none; }
+
+/* Mostrar la X SOLO cuando el overlay está abierto en móvil/tablet */
+@media (max-width: 1023px) {
+  .nav-links.is-open .nav-close { display: block; }
+  .nav-links.is-open .nav-close-btn { display: inline-flex; }
+}
+
+/* En desktop, nunca mostrar la X */
+@media (min-width: 1024px) {
+  .nav-close,
+  .nav-close-btn { display: none !important; }
+}
+
+/* Respeto preferencias de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .nav-links, .hamburger span { transition: none !important; }
+}
+
+/* Ocultar el botón hamburguesa cuando el overlay está abierto (≤1023px) */
+@media (max-width: 1023px) {
+  /* El body recibe .no-scroll cuando open=true en tu Navbar.jsx */
+  .no-scroll .nav-toggle {
+    display: none !important;
+  }
+
+  /* Asegura que, cuando esté visible, nunca tape al overlay */
+  .nav-toggle {
+    z-index: 2147483000 !important;
+  }
+}
+
+/* Móvil (≤768px) – mostrar completo, sin recorte */
+@media (max-width: 768px) {
+  .video_section {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background: #000;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .video_section video {
+    width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 60px);
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Tablet/desktop – hero alto sin cambios notables */
+@media (min-width: 769px) {
+  .video_section { height: 90vh; }
+  .video_section video { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* ====== CONTADOR (Grid 2x2 en móvil) ====== */
+
+/* En móvil: 2 filas de 2 cuadros (mejor visualización) */
+@media (max-width: 768px) {
+  .contador_section {
+    padding: 32px 16px; /* Ajusta padding para móvil */
+  }
+
+  .contador_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .contador_titulo {
+    font-size: 1.5rem;  /* Título ajustado para móviles */
+    margin-bottom: 14px;
+  }
+
+  .contador_col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contador_label {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: #222;
+  }
+
+  .contador_valor {
+    font-size: 1.8rem; /* Ajuste de tamaño para móvil */
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    width: 100%; /* Ocupa el 100% del espacio */
+  }
+}
+
+/* En tablet y más allá, usa 4 cuadros */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .contador_section {
+    padding: 40px 24px;
+  }
+
+  .contador_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .contador_titulo {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+  }
+
+  .contador_valor {
+    font-size: 2rem; /* Tamaño de valor más grande en tablet */
+    padding: 14px 18px;
+  }
+}
+
+/* En pantallas grandes, mantén la distribución de 4 cuadros */
+@media (min-width: 1024px) {
+  .contador_section {
+    padding: 30px 450px;
+  }
+
+  .contador_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px !important;
+    margin-top: 16px;
+  }
+
+  .contador_titulo {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+  }
+
+  .contador_valor {
+    font-size: 2.4rem; /* Tamaño más grande en escritorio */
+    padding: 16px 20px;
+  }
+}
+
+/* --- Aseguramos que cada componente tenga suficiente espacio para no solaparse --- */
+
+/* Añadir espacio inferior entre los componentes */
+.success_cases_section, 
+.trusted_by_section, 
+.leaders_section {
+  margin-bottom: 80px !important; /* Ajustamos margen inferior para separación */
+}
+
+/* Aseguramos que el contenedor de casos de éxito y otros elementos ocupen 100% de alto disponible */
+.success_cases_section,
+.trusted_by_section,
+.leaders_section {
+  width: 100%;  /* Asegura que los componentes no se desborden */
+  box-sizing: border-box;
+  padding-bottom: 70px; /* Añadimos más espacio para la separación entre los componentes */
+}
+
+/* En dispositivos móviles: Añadimos más margen entre los componentes para que no se solapen */
+@media (max-width: 768px) {
+  .success_cases_section,
+  .trusted_by_section,
+  .leaders_section {
+    margin-bottom: 100px !important; /* Añadir más espacio en móvil */
+  }
+
+  .cases_grid {
+    grid-template-columns: 1fr;   /* Aseguramos que en móvil las tarjetas estén en 1 columna */
+    gap: 12px;                    /* Ajustamos el espacio entre las tarjetas */
+  }
 }

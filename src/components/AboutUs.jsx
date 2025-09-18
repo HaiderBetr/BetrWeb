@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import '../styles/about.css';
-import equipoImg from '../assets/EQUIPO_2025_3.png';
-import logoNegro from '../assets/logo-negro.png';
+import equipoImg from '../assets/EQUIPO-BETR-6.png';
+import logoBlanco from '../assets/logo-blanco.png';
 
 export default function AboutUs() {
   const factRefs = useRef([]);
@@ -26,12 +26,12 @@ export default function AboutUs() {
 
   return (
     <section className="about_section">
-      <div className='cotainer_logo'>
-      <img src={logoNegro} alt="logo Betr negro" className="logoNegro" />
-      </div>
       <div className="about_banner_container">
         <img src={equipoImg} alt="Equipo Betr Media" className="about_banner_img" />
         <div className="about_banner_overlay">
+      <div className='cotainer_logo'>
+        <img src={logoBlanco} alt="logo Betr negro" className="logoNegro" />
+      </div>
           <h2>¿QUIÉNES SOMOS?</h2>
           <p>
             Betr Media es una empresa de distribución y monetización de contenido en plataformas digitales como YouTube, Facebook y televisión conectada. Tenemos sedes en Bucaramanga y Miami. Nuestro enfoque combina creatividad, análisis de datos e inteligencia artificial para optimizar contenido y aumentar ingresos. Protegemos tus derechos de autor y transformamos tu contenido en experiencias valiosas para tu audiencia.

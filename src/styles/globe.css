@@ -1,104 +1,114 @@
-.globe-container {
-    background: rgb(242, 221, 188);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    width: 480px;
-    height: 480px;
-    overflow: visible;
-    background: transparent;
-    border: none;
-    margin: 0;
-    box-shadow: none;
-}
-
-.globe-container canvas {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-@keyframes popIn {
-    0%   { transform: scale(.65) translateY(8px) rotate(-4deg); opacity: 0; filter: blur(3px); }
-    60%  { transform: scale(1.06) translateY(0) rotate(0deg);  opacity: 1; filter: blur(0); }
-    100% { transform: scale(1.0) translateY(0) rotate(0deg);    opacity: 1; }
-}
-@keyframes floaty {
-    0%   { transform: translateY(0px) }
-    50%  { transform: translateY(-4px) }
-    100% { transform: translateY(0px) }
-}
-
-/* ===== Sección dos columnas: texto izq / globo der ===== */
+/* ============ BASE / LAYOUT ============ */
 .world-section {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: clamp(16px, 4vw, 56px);
-  margin: 0 ;
-  padding: clamp(16px, 3vw, 32px);
-  background: rgb(242, 221, 188);
+  padding: clamp(16px, 5vw, 40px);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;              /* limita ancho en desktop, no afecta mobile */
+  background: rgb(242,221,188);
+  box-sizing: border-box;
+  overflow: visible;               /* anti-recorte de hijos */
 }
+
+.world-copy,
+.globe-container { min-width: 0; } /* permite encoger en flex sin desbordar */
 
 /* Columna de texto */
 .world-copy {
   flex: 1 1 44%;
-  min-width: 260px;
 }
-
 .world-copy h2 {
   margin: 0 0 12px 0;
   font-family: 'Anton', sans-serif;
   font-weight: 800;
-  font-size: clamp(28px, 3.2vw, 42px);
+  font-size: clamp(26px, 6vw, 42px);
   line-height: 1.1;
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
   color: #111;
   text-transform: uppercase;
 }
-
 .world-copy p {
   margin: 0;
-  font-family: 'inter', sans-serif;
-  font-size: clamp(14px, 1.6vw, 18px);
-  color: #000000;
-  opacity: 0.9;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 4vw, 18px);
+  color: #000;
+  opacity: .9;
 }
 
-/* Columna del globo (tamaño flexible, cuadrado) */
+/* Columna del globo (cuadrado y flexible) */
 .globe-container {
   flex: 1 1 56%;
-  aspect-ratio: 1 / 1;               
-  width: clamp(360px, 44vw, 700px);    
-  height: auto;                      
   position: relative;
-  overflow: visible;                 
+  width: min(92vw, 720px);         /* nunca más ancho que el viewport */
+  aspect-ratio: 1 / 1;             /* alto = ancho (sin heights fijos) */
+  height: auto;
+  overflow: visible;               /* evita que el canvas se corte */
   background: transparent;
   border: none;
+  margin: 0;
   box-shadow: none;
 }
-
-/* Canvas al 100% del contenedor */
 .globe-container canvas {
   position: relative;
   z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
 }
 
-@media (max-width: 900px) {
-  .world-section {
-    flex-direction: column;
-    text-align: center;
-  }
-  .world-copy {
-    order: 1;
-  }
+/* ===== Animaciones (opcional) ===== */
+@keyframes popIn {
+  0%   { transform: scale(.65) translateY(8px) rotate(-4deg); opacity: 0; filter: blur(3px); }
+  60%  { transform: scale(1.06) translateY(0) rotate(0);     opacity: 1; filter: blur(0); }
+  100% { transform: scale(1) translateY(0) rotate(0);         opacity: 1; }
+}
+@keyframes floaty {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-4px) }
+  100% { transform: translateY(0) }
+}
+@media (prefers-reduced-motion: reduce) {
+  .globe-container, .globe-container * { animation: none !important; transition: none !important; }
+}
+
+/* ============ BREAKPOINTS (mobile-first) ============ */
+
+/* ≤600px: apilado, centrado, globo grande pero contenido */
+@media (max-width: 600px) {
+  .world-section { flex-direction: column; text-align: center; gap: 16px; }
+  .world-copy { order: 1; }
+  .globe-container { order: 2; width: min(88vw, 520px); aspect-ratio: 1/1; }
+  .world-copy h2 { font-size: clamp(24px, 8vw, 30px); }
+  .world-copy p  { font-size: clamp(14px, 4vw, 16px); }
+}
+
+/* 601–768px: sigue apilado, más aire y globo controlado */
+@media (min-width: 601px) and (max-width: 768px) {
+  .world-section { flex-direction: column; text-align: center; gap: 20px; }
+  .globe-container { width: min(86vw, 560px); }
+}
+
+/* 769–1023px (tablet): dos columnas equilibradas, sin cortes */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .world-section { flex-direction: row; text-align: left; gap: clamp(20px, 4vw, 40px); }
+  .world-copy   { flex: 1 1 50%; }
   .globe-container {
-    order: 2;
-    width: min(90vw, 640px);
+    flex: 1 1 50%;
+    width: min(46vw, 620px);       /* nunca excede ancho disponible */
+    aspect-ratio: 1/1;
   }
+}
+
+/* 1024–1439px: laptop estable */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .globe-container { width: clamp(420px, 40vw, 680px); }
+}
+
+/* ≥1440px: solo límites suaves */
+@media (min-width: 1440px) {
+  .world-section { max-width: 1500px; }
+  .globe-container { width: clamp(520px, 38vw, 720px); }
 }

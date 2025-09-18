@@ -1,41 +1,48 @@
 .success_cases_section {
   padding: 80px 2%;
   background-color: #000;
-  color: white;
+  color: #fff;
   text-align: center;
   font-family: 'Inter', sans-serif;
 }
 
 .section_title {
   font-family: 'Anton', sans-serif;
-  font-size: 2.6rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   margin-bottom: 50px;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   letter-spacing: 1px;
+  height: 120px;
 }
 
+/* Grid base (mobile-first) */
 .cases_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  height: 330px;
-  gap: 15px;
+  grid-template-columns: 1fr; /* mobile base: 1 columna */
+  gap: 10px;
   justify-content: center;
+  align-items: stretch;
+  margin: 0 auto;
 }
 
+/* Tarjeta */
 .case_card_clean {
   position: relative;
   overflow: hidden;
-  border-radius: 9px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease;
   background-color: #111;
+  height: auto;
+  aspect-ratio: 16 / 10; /* Mantiene proporción consistente en todas las filas */
 }
 
 .case_card_clean img {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
   filter: grayscale(100%);
   transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -49,23 +56,26 @@
   filter: grayscale(0%);
 }
 
-/* Overlay inferior que aparece al hacer hover */
+/* Overlay inferior */
 .case_overlay_bottom {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 12px 10px 10px;
-  background: rgba(0, 0, 0, 0.723);
-  color: white;
+  padding: 10px 10px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
   text-align: center;
   font-family: 'Anton', sans-serif;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: clamp(0.92rem, 0.85vw, 0.9rem);
+  line-height: 1.15;
+  letter-spacing: 0.3px;
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  z-index: 2;
 }
 
 .case_card_clean:hover .case_overlay_bottom {
@@ -73,16 +83,21 @@
 }
 
 .case_title {
-  font-size: 1.2rem;
+  font-size: clamp(0.92rem, 1vw, 1.05rem);
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
   letter-spacing: 0.5px;
 }
 
 .case_metrics {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
+  font-size: clamp(0.72rem, 0.85vw, 0.9rem);
   text-transform: none;
   align-items: center;
 }
@@ -94,78 +109,211 @@
 }
 
 .case_metrics img {
-  width: 14px;
-  height: 14px;
+  width: clamp(10px, 0.8vw, 12px);
+  height: clamp(10px, 0.8vw, 12px);
 }
 
-/* ====== Portátil (1024px – 1439px) ====== */
+/* ====== ACCESIBILIDAD ====== */
+/* Overlay visible en dispositivos táctiles; sin escalado por hover */
+@media (hover: none), (pointer: coarse) {
+  .case_overlay_bottom { opacity: 1; }
+  .case_card_clean:hover { transform: none; }
+}
+
+/* Respeta preferencias de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .case_card_clean { transition: none; }
+  .case_card_clean img { transition: none; }
+}
+
+/* ====== BREAKPOINTS ====== */
+/* MOBILE PEQUEÑO (≤600px): 1 columna */
+@media (max-width: 600px) {
+  .success_cases_section {
+    padding: 48px 5%;
+  }
+  .cases_grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .case_overlay_bottom {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+
+  .case_overlay_bottom img {
+    width: 20px;
+    height: 20px;
+  }
+  .case_metrics { font-size: 0.78rem; gap: 6px; }
+}
+
+/* MOBILE GRANDE / TABLET CHICA (601–768px): 2 columnas */
+@media (min-width: 601px) and (max-width: 768px) {
+  .success_cases_section {
+    padding: 52px 5%;
+  }
+  .cases_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .case_overlay_bottom {
+    padding: 10px 10px;
+    font-size: 0.9rem;
+  }
+  .case_metrics { font-size: 0.8rem; gap: 8px; }
+
+  .case_overlay_bottom img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* TABLET (769–1023px): 3 columnas */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .success_cases_section {
+    padding: 60px 4%;
+  }
+  .section_title { margin-bottom: 36px; }
+  .cases_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .case_overlay_bottom {
+    padding: 12px 10px;
+    font-size: 0.92rem;
+    z-index: 3;
+  }
+  .case_overlay_bottom img {
+    width: 20px;
+    height: 20px;
+  }
+  .case_metrics { font-size: 0.82rem; gap: 8px; }
+}
+
+/* === FIX: Laptop (1024–1439px) cards más grandes === */
 @media (min-width: 1024px) and (max-width: 1439px) {
   .cases_grid {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 18px;
-  }
-
-  .case_card_clean {
-    height: 330px;        /* altura para portátil */
-  }
-
-  .case_card_clean img {
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-/* ====== Pantalla grande (≥ 1440px) ====== */
-@media (min-width: 1440px) {
-  .cases_grid {
-    grid-template-columns: repeat(6, 1fr) !important;
+    /* De 4 → 3 columnas para ganar ancho de tarjeta */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
-    max-width: 1600px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 
   .case_card_clean {
-    height: 350px;        /* altura para pantalla grande */
+    /* Quitamos proporción y damos altura generosa y adaptable */
+    aspect-ratio: auto;
+    height: clamp(280px, 28vw, 360px);
+    border-radius: 12px;
   }
 
   .case_card_clean img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
+  .case_overlay_bottom {
+    font-size: 0.95rem;
+    padding: 12px 12px;
+  }
+  .case_overlay_bottom img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .case_overlay_bottom .case_metrics img { width: 18px; height: 18px; }
+  .case_overlay_bottom .case_metrics { gap: 7px; }
+  .case_overlay_bottom .case_metrics div { gap: 6px; }  
+
+  .case_overlay_bottom{ font-size: clamp(0.78rem, 0.8vw, 0.88rem); }
+  .case_title{ font-size: clamp(0.9rem, 0.95vw, 1rem); }
+  .case_metrics{ font-size: clamp(0.7rem, 0.8vw, 0.85rem); }
+  .case_metrics img{ width: clamp(10px, 0.7vw, 12px); height: clamp(10px, 0.7vw, 12px); }
 }
 
-/* ====== Tablet (769px – 1023px): 3 por fila, altura auto ====== */
-@media (min-width: 769px) and (max-width: 1023px) {
+
+/* === FIX PANTALLA GRANDE (≥1440px): cards más grandes === */
+@media (min-width: 1440px) and (max-width: 1919px) {
   .cases_grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 16px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    max-width: min(1800px, 92vw);
+    margin: 0 auto;
   }
 
   .case_card_clean {
-    height: auto; /* se adapta */
-    aspect-ratio: 16/11;
+    aspect-ratio: auto;
+    height: clamp(260px, 20vw, 380px);
+    border-radius: 14px;
   }
 
   .case_card_clean img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
+  .case_overlay_bottom {
+    font-size: 1rem;
+    padding: 11px 2px;
+  }
+
+  .case_overlay_bottom .case_metrics img { width: clamp(18px, 1.25vw, 24px); height: clamp(18px, 1.25vw, 24px); }
+  .case_overlay_bottom .case_metrics { gap: 8px; }
+  .case_overlay_bottom .case_metrics div { gap: 6px; }
+
+  .case_overlay_bottom .case_metrics img {
+    width: clamp(16px, 1.1vw, 22px);
+    height: clamp(16px, 1.1vw, 22px);
+  }
+  .case_overlay_bottom .case_metrics div { gap: 6px; }
 }
 
-/* ====== Móvil (≤ 768px): 2 por fila, altura auto ====== */
-@media (max-width: 768px) {
+/* === 4K / Ultra (≥1920px): una sola fila === */
+@media (min-width: 1920px) {
   .cases_grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px;
+    display: flex;            /* forzamos fila */
+    flex-wrap: nowrap;        /* SIN salto de línea */
+    gap: 13px;
+    overflow-x: auto;         /* aparece scroll si no alcanzan a caber todas */
+    padding-bottom: 8px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+
+    /* ancho centrado con respiración lateral */
+    max-width: 120vw;
+    margin: 0 auto;
   }
 
   .case_card_clean {
+    /* tamaño moderado para que entren muchas en 4K */
+    flex: 0 0 clamp(290px, 15.5vw, 380px);
     height: auto;
-    aspect-ratio: 4/5;
+    aspect-ratio: 0 / 10;
+    border-radius: 14px;
+    scroll-snap-align: start;
   }
 
   .case_card_clean img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  .case_overlay_bottom{ font-size: clamp(0.72rem, 0.7vw, 0.82rem); padding: 9px 10px; }
+  .case_title{ font-size: clamp(1.8rem, 1.2vw, 1.8rem); }
+  .case_metrics{ font-size: clamp(0.68rem, 0.7vw, 0.82rem); gap: 7px; }
+  .case_metrics img{ width: clamp(12px, 2.65vw, 17px); height: clamp(12px, 1.65vw, 17px); }
+
+  .case_overlay_bottom .case_metrics img {
+    width: clamp(25px, 1.35vw, 34px);
+    height: clamp(25px, 1.35vw, 34px);
+  }
+
+  .case_overlay_bottom .case_metrics img { width: clamp(30px, 1.6vw, 39px); height: clamp(30px, 1.6vw, 39px); }
+  .case_overlay_bottom .case_metrics { gap: 10px; }
+  .case_overlay_bottom .case_metrics div { gap: 10px; }
 }
+
