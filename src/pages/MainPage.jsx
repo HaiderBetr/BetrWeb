@@ -15,7 +15,7 @@ import Contact from "../components/Contact";
 
 export default function MainPage() {
   useEffect(() => {
-    const BASE_HORAS = 60480;
+    const BASE_HORAS = 79480;
     let acumuladoMs = 0;
     let inicioReal = Date.now();
 
