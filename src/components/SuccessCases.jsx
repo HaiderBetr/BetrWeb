@@ -70,7 +70,7 @@ export default function SuccessCases() {
       <div className="cases_grid">
         {cases.map((item, i) => (
           <div className="case_card_clean" key={i}>
-            <img src={item.img} alt={item.titulo} />
+            <img src={item.img} alt={item.titulo} loading="lazy"/>
             <div className="case_overlay_bottom">
               <div className="case_title">{item.titulo}</div>
               <div className="case_metrics">
