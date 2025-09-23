@@ -27,10 +27,10 @@ export default function AboutUs() {
   return (
     <section className="about_section">
       <div className="about_banner_container">
-        <img src={equipoImg} alt="Equipo Betr Media" className="about_banner_img" />
+        <img src={equipoImg} alt="Equipo Betr Media" className="about_banner_img" loading='lazy' />
         <div className="about_banner_overlay">
       <div className='cotainer_logo'>
-        <img src={logoBlanco} alt="logo Betr negro" className="logoNegro" />
+        <img src={logoBlanco} alt="logo Betr negro" className="logoNegro" loading='lazy' />
       </div>
           <h2>¿QUIÉNES SOMOS?</h2>
           <p>
