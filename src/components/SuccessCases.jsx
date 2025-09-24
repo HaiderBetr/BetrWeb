@@ -3,13 +3,13 @@ import iconOJO from "../assets/logos-client/icon/icono-ojo.png";
 import iconPC from "../assets/logos-client/icon/icono-pc.png";
 import iconPERSONA from "../assets/logos-client/icon/icono-persona.png";
 
-import doctorImg from "../assets/logos-client/3-TGD.png";
+import doctorImg from "../assets/logos-client/3-TGD.webp";
 /*import telemundoMain from "../assets/logos-client/7-T.png";*/
-import sharkTank from "../assets/logos-client/1-STM.png";
-import casoCerrado from "../assets/logos-client/2-CC.png";
-import casadosARG from "../assets/logos-client/4-CCHA.png";
-import andresLopez from "../assets/logos-client/5-AL.png";
-import rosarioT from "../assets/logos-client/6-RT.png";
+import sharkTank from "../assets/logos-client/1-STM.webp";
+import casoCerrado from "../assets/logos-client/2-CC.webp";
+import casadosARG from "../assets/logos-client/4-CCHA.webp";
+import andresLopez from "../assets/logos-client/5-AL.webp";
+import rosarioT from "../assets/logos-client/6-RT.webp";
 
 export default function SuccessCases() {
   const cases = [
