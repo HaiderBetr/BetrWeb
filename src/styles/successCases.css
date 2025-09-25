@@ -1,5 +1,5 @@
 .success_cases_section {
-  padding: 80px 2%;
+  padding: 80px 2% 0px;
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -8,8 +8,8 @@
 
 .section_title {
   font-family: 'Anton', sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  margin-bottom: 50px;
+  font-size: clamp(2.2rem, 2.5vw, 1.6rem);
+  margin-bottom: 10px;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 1px;
@@ -130,7 +130,7 @@
 /* MOBILE PEQUEÑO (≤600px): 1 columna */
 @media (max-width: 600px) {
   .success_cases_section {
-    padding: 48px 5%;
+    padding: 48px 5% 0px;
   }
   .cases_grid {
     grid-template-columns: 1fr;
@@ -152,7 +152,7 @@
 /* MOBILE GRANDE / TABLET CHICA (601–768px): 2 columnas */
 @media (min-width: 601px) and (max-width: 768px) {
   .success_cases_section {
-    padding: 52px 5%;
+    padding: 52px 5% 0px;
   }
   .cases_grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -173,7 +173,7 @@
 /* TABLET (769–1023px): 3 columnas */
 @media (min-width: 769px) and (max-width: 1023px) {
   .success_cases_section {
-    padding: 60px 4%;
+    padding: 60px 4% 0px;
   }
   .section_title { margin-bottom: 36px; }
   .cases_grid {

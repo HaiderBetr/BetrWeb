@@ -181,3 +181,53 @@
     font-size: 2.5rem;
   }
 }
+
+/* ——— SOLO MÓVIL: imagen arriba, info debajo; sin overlay flotante ——— */
+@media (max-width: 768px) {
+  /* La imagen queda limpia, sin efectos */
+  .about_banner_img {
+    filter: none !important;
+    transition: none;
+    display: block;
+    border-radius: 16px;
+  }
+
+  /* El overlay deja de ser absoluto y pasa al flujo normal (debajo de la imagen) */
+  .about_banner_overlay {
+    position: static;
+    inset: auto;
+    opacity: 1;
+    background: transparent;
+    color: #111;
+    padding: 18px 16px 16px;
+    text-align: left; /* cambia a center si lo prefieres */
+    transition: none;
+    box-shadow: none;
+    border-radius: 14px;
+    margin-top: 12px;
+    text-align: justify;
+  }
+
+  /* Títulos y texto adaptados a móvil */
+  .about_banner_overlay h2 {
+    font-size: 1.8rem;
+    color: #111;
+    margin-bottom: 12px;
+  }
+  .about_banner_overlay p {
+    font-size: 0.98rem;
+    color: #333;
+  }
+
+  /* Ajustes del contenedor en móvil */
+  .about_banner_container {
+    margin: 0 auto 28px auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    overflow: visible;
+  }
+
+  .container_logo, .cotainer_logo, .logoNegro {
+    display: none !important;
+  }
+}

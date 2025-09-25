@@ -387,34 +387,4 @@ html, body {
   }
 }
 
-/* --- Aseguramos que cada componente tenga suficiente espacio para no solaparse --- */
 
-/* Añadir espacio inferior entre los componentes */
-.success_cases_section, 
-.trusted_by_section, 
-.leaders_section {
-  margin-bottom: 80px !important; /* Ajustamos margen inferior para separación */
-}
-
-/* Aseguramos que el contenedor de casos de éxito y otros elementos ocupen 100% de alto disponible */
-.success_cases_section,
-.trusted_by_section,
-.leaders_section {
-  width: 100%;  /* Asegura que los componentes no se desborden */
-  box-sizing: border-box;
-  padding-bottom: 70px; /* Añadimos más espacio para la separación entre los componentes */
-}
-
-/* En dispositivos móviles: Añadimos más margen entre los componentes para que no se solapen */
-@media (max-width: 768px) {
-  .success_cases_section,
-  .trusted_by_section,
-  .leaders_section {
-    margin-bottom: 100px !important; /* Añadir más espacio en móvil */
-  }
-
-  .cases_grid {
-    grid-template-columns: 1fr;   /* Aseguramos que en móvil las tarjetas estén en 1 columna */
-    gap: 12px;                    /* Ajustamos el espacio entre las tarjetas */
-  }
-}
