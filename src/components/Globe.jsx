@@ -83,7 +83,7 @@ function LandHalo({ texture }) {
   }, [basePositions]);
 
   useFrame(() => {
-    if (haloRef.current) haloRef.current.rotation.y += 0.0010;
+    if (haloRef.current) haloRef.current.rotation.y += 0.0012;
   });
 
   return (
@@ -128,7 +128,7 @@ function LandParticles({ texture }) {
     }
     geometry.attributes.position.needsUpdate = true;
 
-    if (pointsRef.current) pointsRef.current.rotation.y += 0.0010;
+    if (pointsRef.current) pointsRef.current.rotation.y += 0.0012;
   });
 
   return (
