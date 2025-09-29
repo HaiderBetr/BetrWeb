@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import '../styles/about.css';
-import equipoImg from '/EQUIPO-BETR-6.webp';
+import equipoImg from '/EQUIPO-BETR-7.webp';
 import logoBlanco from '../assets/logo-blanco.png';
 
 export default function AboutUs() {
