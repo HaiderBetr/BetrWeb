@@ -7,17 +7,44 @@ export default function Contact() {
     correo: "",
     telefono: "",
     mensaje: "",
+    empresa: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ ok: false, msg: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Formulario enviado:", form);
-    alert("¡Gracias! Tu mensaje ha sido enviado.");
-    setForm({ nombre: "", correo: "", telefono: "", mensaje: "" });
+    setStatus({ ok: false, msg: "" });
+
+    if (form.empresa) return;
+
+    try {
+      setLoading(true);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: form.nombre,
+          correo: form.correo,
+          telefono: form.telefono,
+          mensaje: form.mensaje,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "No se pudo enviar");
+
+      setStatus({ ok: true, msg: "¡Gracias! Tu mensaje fue enviado." });
+      setForm({ nombre: "", correo: "", telefono: "", mensaje: "", empresa: "" });
+    } catch (err) {
+      setStatus({ ok: false, msg: err.message || "Error al enviar el mensaje." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,8 +66,13 @@ export default function Contact() {
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <p className="form-title">Déjanos un mensaje y nos comunicaremos contigo:</p>
+
+          <label style={{display:"none"}}>
+            Empresa:
+            <input type="text" name="empresa" value={form.empresa} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+          </label>
 
           <label>Nombre:
             <input type="text" name="nombre" value={form.nombre} onChange={handleChange} required />
@@ -52,7 +84,14 @@ export default function Contact() {
             </label>
 
             <label>Teléfono:
-              <input type="tel" name="telefono" value={form.telefono} onChange={handleChange} />
+              <input
+                type="tel"
+                name="telefono"
+                value={form.telefono}
+                onChange={handleChange}
+                pattern="^[0-9+\-\s()]*$"
+                placeholder="+57 300 000 0000"
+              />
             </label>
           </div>
 
@@ -60,7 +99,19 @@ export default function Contact() {
             <textarea name="mensaje" value={form.mensaje} onChange={handleChange} required />
           </label>
 
-          <button type="submit" className="submit-btn">Enviar mensaje</button>
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Enviando..." : "Enviar mensaje"}
+          </button>
+
+          {status.msg && (
+            <p
+              role="status"
+              aria-live="polite"
+              style={{ marginTop: 12, color: status.ok ? "green" : "crimson" }}
+            >
+              {status.msg}
+            </p>
+          )}
         </form>
       </div>
 

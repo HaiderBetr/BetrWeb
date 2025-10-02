@@ -18,7 +18,8 @@
     "react-scroll": "^1.9.3",
     "react-tsparticles": "^2.12.2",
     "three": "^0.179.1",
-    "tsparticles": "^3.9.1"
+    "tsparticles": "^3.9.1",
+    "nodemailer": "^6.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
