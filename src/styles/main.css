@@ -385,6 +385,11 @@ html, body {
     font-size: 2.4rem; /* Tamaño más grande en escritorio */
     padding: 16px 20px;
   }
+
+  .video_section {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 

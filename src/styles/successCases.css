@@ -283,6 +283,8 @@
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
 
+    overflow: visible;
+
     /* ancho centrado con respiración lateral */
     max-width: 120vw;
     margin: 0 auto;
@@ -290,7 +292,7 @@
 
   .case_card_clean {
     /* tamaño moderado para que entren muchas en 4K */
-    flex: 0 0 clamp(290px, 15.5vw, 380px);
+    flex: 0 0 clamp(250px, 14.5vw, 360px);
     height: auto;
     aspect-ratio: 0 / 10;
     border-radius: 14px;

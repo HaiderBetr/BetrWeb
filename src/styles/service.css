@@ -1,100 +1,206 @@
+/* Contenedor principal */
 .service_section {
   display: flex;
   flex-direction: column;
-  gap: 60px;
-  padding: 80px 5%;
+  gap: 120px; /* Espacio generoso entre servicios para elegancia */
+  padding: 100px 8%;
   background-color: black;
   color: white;
+  overflow: hidden;
 }
 
-.container_service {
-  width: 100%;
-}
-
+/* Estructura de la Card */
 .service_card {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 60px;
   justify-content: space-between;
+  width: 100%;
+  
+  /* ESTADO INICIAL: Más abajo y totalmente invisible */
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.6s ease-out;
+  transform: translateY(100px); /* Aumentamos la distancia para que el "vuelo" sea más largo */
+  
+  /* Transición más lenta y fluida (0.1s para que se sienta premium) */
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity; /* Optimización para que el navegador prepare la animación */
 }
 
+/* ESTADO FINAL: Cuando entra en pantalla */
 .service_card.fade-in-up {
   opacity: 1;
   transform: translateY(0);
 }
+/* --- LÓGICA DE ZIG-ZAG (Alternancia) --- */
 
-.service_card.left .video_placeholder {
-  order: 0;
+/* Por defecto: Video izquierda, Texto derecha */
+.service_card.left {
+  flex-direction: row;
 }
 
-.service_card.left .service_texts {
-  order: 1;
+/* Invertido: Video derecha, Texto izquierda */
+.service_card.right {
+  flex-direction: row-reverse;
 }
 
-.service_card.right .video_placeholder {
-  order: 1;
+/* --- CONTENEDOR DEL VIDEO --- */
+.video_container {
+  flex: 1;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #000;
+  /* Glow naranja de la imagen */
+  border: 2px solid rgba(255, 140, 0, 0.6); 
+  box-shadow: 0 0 35px rgba(255, 140, 0, 0.25);
 }
 
-.service_card.right .service_texts {
-  order: 0;
+.service_video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
-.video_placeholder {
-  width: 48%;
-  min-height: 220px;
-  background-color: #1c1c1c;
-  color: orange;
-  font-weight: bold;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  text-align: center;
-  padding: 20px;
-  box-shadow: 0 0 10px orange;
-}
-
+/* --- TEXTOS --- */
 .service_texts {
-  width: 48%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 550px;
+}
+
+/* Alineación de texto según la posición */
+.service_card.left .service_texts {
+  text-align: left;
+}
+
+.service_card.right .service_texts {
+  text-align: left; /* Generalmente el texto se ve mejor alineado a la izquierda */
 }
 
 .service_texts h3 {
   font-family: 'Anton', sans-serif;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: 1px;
 }
 
 .service_texts p {
   font-family: 'Bariol-Bold', sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e0e0e0;
 }
 
-@media (max-width: 768px) {
-  .service_card {
-    flex-direction: column;
-    gap: 20px;
+/* =============================================
+RESPONSIVE: SERVICE SECTION
+============================================= */
+@media (min-width: 2560px) {
+  .service_section {
+    gap: 200px; /* Mucho más espacio entre bloques */
+    padding: 150px 10%;
   }
 
-  .video_placeholder,
-  .service_texts {
-    width: 100%;
+  .video_container {
+    max-width: 1000px; /* Videos mucho más grandes y potentes */
+    border-width: 4px; /* Borde más grueso para que se note el glow */
+    box-shadow: 0 0 60px rgba(255, 140, 0, 0.35);
   }
 
   .service_texts h3 {
-    font-size: 1.5rem;
+    font-size: 4rem; /* Títulos masivos e impactantes */
+    margin-bottom: 40px;
   }
 
   .service_texts p {
+    font-size: 1.8rem; /* Texto legible a gran distancia */
+    max-width: 800px;
+  }
+
+  .service_card {
+    gap: 150px; /* Mayor separación entre video y texto */
+  }
+}
+
+/* Laptop Estándar (1024px a 1200px) */
+@media (max-width: 1200px) {
+  .service_section {
+    padding: 60px 6%;
+    gap: 80px;
+  }
+  .service_texts h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tablets y iPads (768px a 1023px) */
+@media (max-width: 1023px) {
+  .service_card, 
+  .service_card.right {
+    flex-direction: column !important; /* Forzamos el stack vertical */
+    gap: 40px;
+  }
+  
+  .video_container {
+    max-width: 90%; /* El video toma más protagonismo */
+    margin: 0 auto;
+  }
+  
+  .service_texts {
+    max-width: 100%;
+    text-align: center !important; /* Centramos para mejor lectura en tablet */
+  }
+}
+
+/* --- RESPONSIVE (Móviles) --- */
+@media (max-width: 968px) {
+  .service_section {
+    padding: 60px 5%;
+    gap: 80px;
+  }
+
+  .service_card, 
+  .service_card.right {
+    flex-direction: column !important; /* Siempre video arriba en móvil */
+    gap: 30px;
+    text-align: center !important;
+  }
+
+  .service_texts {
+    max-width: 100%;
+    text-align: center !important;
+  }
+
+  .video_container {
+    max-width: 100%;
+  }
+
+  .service_texts h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Móviles Grandes y Pequeños (320px a 480px) */
+@media (max-width: 480px) {
+  .service_section {
+    padding: 40px 4%;
+    gap: 60px;
+  }
+  
+  .service_texts h3 {
+    font-size: 1.5rem;
+  }
+  
+  .service_texts p {
     font-size: 0.95rem;
+  }
+  
+  .video_container {
+    border-radius: 10px; /* Bordes más sutiles en pantallas pequeñas */
   }
 }

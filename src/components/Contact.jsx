@@ -1,13 +1,15 @@
 import "../styles/contact.css";
 import { useState } from "react";
 
+const API_BASE = "http://localhost:4000"; // Cambia esto si es necesario
+
 export default function Contact() {
   const [form, setForm] = useState({
     nombre: "",
     correo: "",
     telefono: "",
     mensaje: "",
-    empresa: "",
+    empresa: "", // honeypot
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ ok: false, msg: "" });
@@ -20,11 +22,13 @@ export default function Contact() {
     e.preventDefault();
     setStatus({ ok: false, msg: "" });
 
+    // Bloqueo básico de bots: si el honeypot tiene algo, no enviamos
     if (form.empresa) return;
 
     try {
       setLoading(true);
-      const res = await fetch("/api/contact", {
+
+      const res = await fetch(`${API_BASE}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -35,8 +39,17 @@ export default function Contact() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || "No se pudo enviar");
+      // Parseo seguro (si no viene JSON, leer texto)
+      let data = null;
+      const ct = res.headers.get("content-type") || "";
+      if (ct.includes("application/json")) {
+        data = await res.json().catch(() => null);
+      } else {
+        const text = await res.text().catch(() => "");
+        data = { error: text };
+      }
+
+      if (!res.ok) throw new Error(data?.error || `Error ${res.status}`);
 
       setStatus({ ok: true, msg: "¡Gracias! Tu mensaje fue enviado." });
       setForm({ nombre: "", correo: "", telefono: "", mensaje: "", empresa: "" });
@@ -56,34 +69,66 @@ export default function Contact() {
         <div className="contact-columns">
           <div>
             <h3>EE. UU.</h3>
-            <p>13720 Jetport Commerce Pkwy,<br />Unidad 13 Fort Myers, FL 33913</p>
-            <p className="email">contacto@betrmedia.com</p>
+            <p>+1 239 5441527</p>
+            <p>
+              13720 Jetport Commerce Pkwy,<br />
+              Unidad 13 Fort Myers, FL 33913
+            </p>
+            <p className="email">comercial@betrmedia.com</p>
           </div>
           <div>
             <h3>COLOMBIA</h3>
-            <p>+57 322 849 4987<br />+57 300 552 5228</p>
-            <p className="email">contacto@betrmedia.com</p>
+            <p>
+              +57 300 480 4668<br />
+              +57 300 552 5228
+            </p>
+            <p className="email">comercial@betrmedia.com</p>
           </div>
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <p className="form-title">Déjanos un mensaje y nos comunicaremos contigo:</p>
 
-          <label style={{display:"none"}}>
+          {/* Honeypot oculto */}
+          <label style={{ display: "none" }}>
             Empresa:
-            <input type="text" name="empresa" value={form.empresa} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+            <input
+              type="text"
+              name="empresa"
+              value={form.empresa}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+            />
           </label>
 
-          <label>Nombre:
-            <input type="text" name="nombre" value={form.nombre} onChange={handleChange} required />
+          <label>
+            Nombre:
+            <input
+              type="text"
+              name="nombre"
+              value={form.nombre}
+              onChange={handleChange}
+              required
+              aria-invalid={!form.nombre && status.msg && !status.ok}
+            />
           </label>
 
           <div className="input-row">
-            <label>Correo:
-              <input type="email" name="correo" value={form.correo} onChange={handleChange} required />
+            <label>
+              Correo:
+              <input
+                type="email"
+                name="correo"
+                value={form.correo}
+                onChange={handleChange}
+                required
+                aria-invalid={!form.correo && status.msg && !status.ok}
+              />
             </label>
 
-            <label>Teléfono:
+            <label>
+              Teléfono:
               <input
                 type="tel"
                 name="telefono"
@@ -95,8 +140,15 @@ export default function Contact() {
             </label>
           </div>
 
-          <label>Mensaje:
-            <textarea name="mensaje" value={form.mensaje} onChange={handleChange} required />
+          <label>
+            Mensaje:
+            <textarea
+              name="mensaje"
+              value={form.mensaje}
+              onChange={handleChange}
+              required
+              aria-invalid={!form.mensaje && status.msg && !status.ok}
+            />
           </label>
 
           <button type="submit" className="submit-btn" disabled={loading}>
@@ -117,8 +169,13 @@ export default function Contact() {
 
       <div className="contact-right">
         <h2 className="join-title">ÚNETE A NOSOTROS</h2>
-        <p className="join-text">Trabaja junto a un talentoso y amigable equipo.<br />Desarrolla tu potencial junto a Betr Media.</p>
-        <a href="mailto:empleo@betrmedia.com" className="join-btn">empleo@betrmedia.com</a>
+        <p className="join-text">
+          Trabaja junto a un talentoso y amigable equipo.<br />
+          Desarrolla tu potencial junto a Betr Media.
+        </p>
+        <a href="mailto:empleo@betrmedia.com" className="join-btn">
+          empleo@betrmedia.com
+        </a>
         <p className="cv-hint">Envíanos tu CV junto a tu portafolio o experiencias.</p>
       </div>
     </section>
