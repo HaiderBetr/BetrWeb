@@ -4,28 +4,28 @@ import { useRef } from 'react';
 export default function News() {
   const newsItems = [
     {
-      title: '¿QUÉ MARCAS HAN SIDO TENDENCIA GRACIAS A INFLUENCERS Y CELEBRIDADES?',
-      text: 'En este blog podrás encontrar tres ejemplos claros en los que influencers y celebridades han generado o sacudido las tendencias en redes sociales a favor o en contra de una marca...',
+      title: 'YouTube: crecer no es suerte',
+      text: 'YouTube es hoy una de las plataformas más poderosas para crecer y monetizar, pero muchos canales no despegan por no entender el algoritmo ni a su audiencia. Cada decisión —desde la idea hasta la publicación— impacta en cómo YouTube recomienda tu contenido…',
       color: '#10cfd6ff',
       borderColor: '#10cfd6ff',
       buttonColor: '#10cfd6ff',
-      link: '/blogs/tendencias-marcas',
+      link: 'https://www.linkedin.com/feed/update/urn:li:activity:7392660513630924800',
     },
     {
-      title: 'ASÍ AYUDAMOS A NUESTROS CLIENTES EN YOUTUBE',
-      text: 'En este blog podrás encontrar tres ejemplos claros en los que influencers y celebridades han generado o sacudido las tendencias en redes sociales a favor o en contra de una marca...',
+      title: 'YouTube ahora se crea en equipo',
+      text: 'YouTube deja de ser solo videos y se vuelve social: colaboraciones visibles desde el título, audiencias compartidas y nuevas formas de crecer en equipo. Todo apunta a que las estrategias de creación y crecimiento van a cambiar por completo…',
       color: '#ff7c00',
       borderColor: '#ff7c00',
       buttonColor: '#ff7c00',
-      link: '/blogs/clientes-youtube',
+      link: 'https://www.linkedin.com/feed/update/urn:li:activity:7374568095966720001',
     },
     {
-      title: '¿CÓMO AUMENTAR TU PRESENCIA EN REDES?',
-      text: 'Te explicamos cómo desarrollar estrategias sostenibles que mejoren tu engagement y atraigan audiencias clave para tu contenido o marca.',
+      title: 'Instagram ya no es formatos, es estrategia',
+      text: 'En 2025 Instagram funciona como un embudo: cada formato cumple un rol distinto y usarlos igual es el error más común. Reels, carruseles, stories y lives deben trabajar juntos para atraer, educar y convertir…',
       color: '#a84fdc',
       borderColor: '#a84fdc',
       buttonColor: '#a84fdc',
-      link: '/blogs/presencia-digital',
+      link: 'https://www.linkedin.com/feed/update/urn:li:activity:7373777683647741953',
     },
   ];
 

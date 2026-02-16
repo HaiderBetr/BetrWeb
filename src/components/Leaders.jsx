@@ -23,12 +23,13 @@ export default function Leaders() {
             bgColor: '#CFE538',
             image: joacoImg,
             items: [
-                'Máster en Periodismo y Comunicación Digital',
-                'Director de Estrategia Digital en Betr Media',
+                'Administrador de Empresas',
+                '+15 años en gestión de proyectos y emprendimientos',
                 'Consultor de transformación digital',
-                'Consultor de marketing político',
-                'Exdirector de desarrollo de audiencias en CARACOL TV',
-                'Exdirector Digital en CANAL CAPITAL',
+                'Líder en sinergias de equipos',
+                'Ex Director Comercial, Talleres Rocha SAS',
+                'Director Comercial y Administrativo, Betr Media SAS',
+                'Proactivo y orientado a resultados',
             ],
         },
     ];

@@ -71,8 +71,8 @@ export default function Contact() {
             <h3>EE. UU.</h3>
             <p>+1 239 5441527</p>
             <p>
-              13720 Jetport Commerce Pkwy,<br />
-              Unidad 13 Fort Myers, FL 33913
+              6761 SAINT IVES COURT,<br />
+              FORT MYERS FL, 33966
             </p>
             <p className="email">comercial@betrmedia.com</p>
           </div>
