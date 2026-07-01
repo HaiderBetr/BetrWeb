@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../styles/style.css';
 import logoBlanco from '../assets/logo-blanco.png';
 import logoColor from '../assets/logo-color.png';
@@ -19,9 +18,7 @@ const floatingWords = [
 ];
 
 export default function LoadingScreen() {
-  const navigate = useNavigate();
   const loadingTextRef = useRef(null);
-  const screenRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -34,7 +31,9 @@ export default function LoadingScreen() {
     messages.forEach((msg, i) => {
       setTimeout(() => {
         if (!loadingTextRef.current) return;
+
         loadingTextRef.current.classList.remove("visible");
+
         setTimeout(() => {
           if (loadingTextRef.current) {
             loadingTextRef.current.textContent = msg;
@@ -44,37 +43,31 @@ export default function LoadingScreen() {
       }, initialDelay + i * delayPerMessage);
     });
 
-    const totalTime = initialDelay + messages.length * delayPerMessage + 1000;
-
-    const redirTimeout = setTimeout(() => {
-      if (screenRef.current) screenRef.current.classList.add("fade-out");
-      setTimeout(() => {
-        navigate("/main");
-      }, 1500);
-    }, totalTime);
-
     const interval = setInterval(() => {
       if (!containerRef.current) return;
+
       const frase = floatingWords[Math.floor(Math.random() * floatingWords.length)];
       const span = document.createElement("span");
+
       span.className = "word";
       span.textContent = frase;
       span.style.top = Math.random() * 90 + "%";
       span.style.left = Math.random() * 90 + "%";
       span.style.fontSize = `${0.6 + Math.random() * 0.4}rem`;
+
       containerRef.current.appendChild(span);
+
       setTimeout(() => span.remove(), 4000);
     }, 300);
 
     return () => {
-      clearTimeout(redirTimeout);
       clearInterval(interval);
       document.body.style.overflow = 'auto';
     };
-  }, [navigate]);
+  }, []);
 
   return (
-    <div className="loading_screen" ref={screenRef}>
+    <div className="loading_screen">
       <div className="background_words" ref={containerRef}></div>
 
       <div className="logo_container">
